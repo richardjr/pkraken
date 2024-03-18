@@ -11,6 +11,13 @@ API_KEY=your api key
 GAS_MPRN=your mprn
 ELEC_MPAN=your mpan
 ELEC_SERIAL=your serial
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=xxxxxxxx
+DB_USER=xxxxxxxx
+DB_PASSWORD=xxxxxxxx
+DB_HOST=xxxxxxxx
+DB_PORT=xxxxxxxx
+
 ```
 # Tests
 
