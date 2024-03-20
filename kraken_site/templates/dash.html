@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block header %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" integrity="sha512-ZwR1/gSZM3ai6vCdI+LVF1zSq/5HznD3ZSTk7kajkaj4D292NLuduDCO1c/NT8Id+jE58KYLKT7hXnbtryGmMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>{% endblock %}
+
 {% block content %}
     <h1>Dashboard</h1>
     <p>Welcome to the dashboard!</p>
@@ -15,13 +18,73 @@
         Electric meter not found
     {% endif %}
 
+
+
     {% if consumption %}
-        <div>
-        {% for row in consumption.results %}
-            <div style="height: {{row.consumption}}px; display: inline-block; background: red;">{{row.consumption}}</div>
-        {% endfor %}
-        </div>
+        <canvas id="elec" width="400" height="100"></canvas>
+    {% endif %}
+
+
+    {% if consumption_gas %}
+        <canvas id="gas" width="400" height="100"></canvas>
     {% endif %}
 </div>
+
+<script>
+    const gas_data={{consumption_gas.results|safe}};
+    const elec_data={{consumption.results|safe}};
+	new Chart(
+		document.getElementById('gas'),
+		{
+			type: 'bar',
+			options: {
+				animation: false,
+				plugins: {
+					legend: {
+						display: false
+					},
+					tooltip: {
+						enabled: false
+					}
+				}
+			},
+			data: {
+				labels: gas_data.map(row => row.interval_start),
+				datasets: [
+					{
+						label: 'Acquisitions by year',
+						data: gas_data.map(row => row.consumption)
+					}
+				]
+			}
+		}
+	);
+	new Chart(
+		document.getElementById('elec'),
+		{
+			type: 'bar',
+			options: {
+				animation: false,
+				plugins: {
+					legend: {
+						display: false
+					},
+					tooltip: {
+						enabled: false
+					}
+				}
+			},
+			data: {
+				labels: elec_data.map(row => row.interval_start),
+				datasets: [
+					{
+						label: 'Acquisitions by year',
+						data: elec_data.map(row => row.consumption)
+					}
+				]
+			}
+		}
+	);
+</script>
 {% endblock %}
 

@@ -48,8 +48,10 @@ class DashboardView(View):
         kraken = KrakenAPI(userSettings.api_key)
         mpan = kraken.get_meter_point(userSettings.elec_mpan)
         consumption = kraken.get_meter_point_consumption(userSettings.elec_mpan,userSettings.elec_serial)
+        consumption_gas = kraken.get_gas_meter_point_consumption(userSettings.gas_mprn,userSettings.gas_serial)
         return {
             'mpan': mpan,
-            'consumption':consumption
+            'consumption':consumption,
+            'consumption_gas': consumption_gas
         }
 

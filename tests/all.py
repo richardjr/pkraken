@@ -24,6 +24,14 @@ class TestKraken(unittest.TestCase):
         kraken.close()
         self.assertGreater(result['count'], 0)
 
+    def test_mpan_usage(self):
+        api_key = os.getenv("API_KEY")
+        kraken = KrakenAPI.KrakenAPI(api_key)
+        result = kraken.get_gas_meter_point_consumption(os.getenv("GAS_MPRN"),os.getenv("GAS_SERIAL"))
+        print(result)
+        kraken.close()
+        self.assertGreater(result['count'], 0)
+
     def test_products(self):
         api_key = os.getenv("API_KEY")
         kraken = KrakenAPI.KrakenAPI(api_key)
