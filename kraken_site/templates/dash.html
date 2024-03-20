@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Welcome to the dashboard!</p>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Save</button>
+    </form>
+<div>
+    {% if mpan %}
+        Electric meter found: {{mpan.mpan}} {{mpan.gsp}} {{mpan.profile_class}}
+    {% else %}
+        Electric meter not found
+    {% endif %}
+
+    {% if consumption %}
+        <div>
+        {% for row in consumption.results %}
+            <div style="height: {{row.consumption}}px; display: inline-block; background: red;">{{row.consumption}}</div>
+        {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
