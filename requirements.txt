@@ -1,5 +1,4 @@
 django
 git+https://github.com/richardjr/django-css.git
-dotenv
 psycopg2
 gunicorn
