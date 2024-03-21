@@ -1,4 +1,4 @@
 django
 git+https://github.com/richardjr/django-css.git
-psycopg2-bin
+psycopg2-binary
 gunicorn
