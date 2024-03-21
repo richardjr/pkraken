@@ -1,1 +1,5 @@
 django
+git+https://github.com/nautoguide/django-css.git
+dotenv
+psycopg2
+gunicorn
